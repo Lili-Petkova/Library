@@ -1,0 +1,1 @@
+This is my Django project. My homework in Hillel school.
