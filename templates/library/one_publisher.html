@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>This publisher has {{ amount }} books.</h2>
+<ol>
+    {% for obj in this_books %}
+        <p><li>"{{ obj }}". {{ obj.author }} ({{ obj.pubdate }})</li></p>
+    {% endfor %}
+    <p><a href="{% url 'library:publishers' %}">back to publishers</a></p>
+</ol>
+</body>
+</html>
