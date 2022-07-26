@@ -8,7 +8,7 @@
 <h2>This publisher has {{ amount }} books.</h2>
 <ol>
     {% for obj in this_books %}
-        <p><li>"{{ obj }}". {{ obj.author }} ({{ obj.pubdate }})</li></p>
+        <p><li><a href="{% url 'library:one_book' name=obj.name %}">"{{ obj }}"</a>. {{ obj.author }} ({{ obj.pubdate }})</li></p>
     {% endfor %}
     <p><a href="{% url 'library:publishers' %}">back to publishers</a></p>
 </ol>

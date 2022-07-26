@@ -38,12 +38,14 @@ def one_author(request, name):
 def books(request):
     all_books = Book.objects.select_related('author').all()
     all_author = Author.objects.all()
+    pr = round(Book.objects.aggregate(Avg('price'))['price__avg'])
     return render(
         request,
         'library/books.html',
         {
             'all_books': all_books,
-            'all_author': all_author
+            'all_author': all_author,
+            'pr': pr
         }
     )
 
@@ -101,8 +103,7 @@ def stores(request):
 def one_store(request, pk):
     store = Store.objects.prefetch_related('books').get(pk=pk)
     storebooks = store.books.all()
-    pr = Book.objects.filter(store__id=pk).aggregate(Avg('price'))
-    price = round(pr['price__avg'])
+    price = round(Book.objects.filter(store__id=pk).aggregate(Avg('price'))['price__avg'])
 
     return render(
         request,

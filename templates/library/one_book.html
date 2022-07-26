@@ -9,5 +9,6 @@
 <p>Author - {{ book.author }}.</p>
 <p>Publication date: {{ book.pubdate }}.</p>
 <p>The book is sold in {{ all.0.count_store }} stores.</p>
+<p><a href="{% url 'library:books' %}">back to all books</a></p>
 </body>
 </html>
