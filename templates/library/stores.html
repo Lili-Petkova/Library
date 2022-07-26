@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>All stores:</h1>
+<h3>Click on a store's name to see a list of their books.</h3>
+    <ul>
+        {% for obj in all_stores %}
+            <li><a href="{% url 'library:one_store' pk=obj.pk %}">{{ obj }} ({{ obj.count_books }} books)</a></li>
+        {% endfor %}
+    </ul>
+    <p><a href="{% url 'library:start' %}">back</a></p>
+</body>
+</html>

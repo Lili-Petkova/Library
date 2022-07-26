@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>{{ store }}</h1>
+<h2>{{ publ_book }}</h2>
+<h3>The average cost of books in this store is {{ price }} euros.</h3>
+<ul>
+    {% for obj in storebooks %}
+        <li><p>"{{ obj }}". <a href="{% url 'library:one_author' name=obj.author %}">{{ obj.author }}</a>
+                - {{ obj.price }} euros</p>
+    {% endfor %}</li>
+</ul>
+<p><a href="{% url 'library:stores' %}">back to all stores</a></p>
+</body>
+</html>
+
+
+

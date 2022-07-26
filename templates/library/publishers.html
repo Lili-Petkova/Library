@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>{{ first }}</h1>
+<h1>All publishers:</h1>
+<h3>Click on a publisher's name to see a list of their books.</h3>
+<p>{{ all_books.count_author }}</p>
+    <ul>
+        {% for obj in all_publishers %}
+            <li><a href="{% url 'library:one_publisher' pk=obj.pk %}">{{ obj }} {{ obj.count_book }}</a></li>
+        {% endfor %}
+    </ul>
+    <p><a href="{% url 'library:start' %}">back</a></p>
+</body>
+</html>
