@@ -1,5 +1,8 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Avg, Count
 from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.views import generic
 
 from library.models import Author, Book, Publisher, Store
 
@@ -114,3 +117,35 @@ def one_store(request, pk):
             'price': price,
         }
     )
+
+
+class BookCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Book
+    fields = ["name", 'price', 'author', 'publisher', 'pubdate']
+    success_url = reverse_lazy('library:books')
+    login_url = '/admin/'
+
+
+class BookUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Book
+    fields = ["name", 'price', 'author', 'publisher', 'pubdate']
+    template_name_suffix = '_update_form'
+    success_url = reverse_lazy('library:books')
+    login_url = '/admin/'
+
+
+class BookDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Book
+    template_name_suffix = '_check_delete'
+    success_url = reverse_lazy('library:books')
+    login_url = '/admin/'
+
+
+class BookDetailView(generic.DetailView):
+    model = Book
+
+
+class BookListView(generic.ListView):
+    model = Book
+    paginate_by = 10
+    queryset = Book.objects.select_related("author")
