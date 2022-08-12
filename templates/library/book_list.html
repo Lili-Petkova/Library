@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Books</title>
+</head>
+<body>
+  <h1>Book List</h1>
+
+  {% if book_list %}
+    <ul>
+
+      {% for book in book_list %}
+        <li>
+          <a href="{% url 'library:one_book' name=book.name %}">"{{ book.name }}"</a>  {{ book.author }}
+        </li>
+      {% endfor %}
+
+    </ul>
+  {% else %}
+    <p>There are no books in the library.</p>
+  {% endif %}
+<div>
+    <p>page:</p>
+    {% if is_paginated %}
+        {% if page_obj.has_previous %}
+            <a href="?page={{page_obj.previous_page_number}}">previous</a>
+        {% endif %}
+        {% for i in paginator.page_range %}
+            {% if page_obj.number == i %}
+                <a>{{ i }}</a>
+            {% else %}
+                <a href="?page={{ i }}">{{ i }}</a>
+            {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+            <a href="?page={{page_obj.next_page_number}}">next</a>
+        {% endif %}
+    {% endif %}
+    </div>
+</body>
+</html>

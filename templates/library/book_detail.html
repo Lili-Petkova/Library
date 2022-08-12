@@ -2,14 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Book</title>
 </head>
 <body>
-<h2>{{ book }}</h2>
-<p>Author - {{ book.author }}.</p>
-<p>Publication date: {{ book.pubdate }}.</p>
-<p>The book is sold in {{ all.0.count_store }} stores.</p>
-
+<h2>"{{ object }}"</h2>
+<p>Author - {{ object.author }}.</p>
+<p>Publication date: {{ object.pubdate }}.</p>
+<p>Price {{ object.price }} euro.</p>
 <p><a href="{% url 'library:update_book' pk=book.pk %}">update </a>or
 <a href="{% url 'library:delete_book' pk=book.pk %}">delete this book</a></p>
 <p><a href="{% url 'library:books' %}">back to all books</a></p>
