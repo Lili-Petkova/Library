@@ -1,10 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator
 from django.db.models import Avg, Count
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from library.models import Author, Book, Publisher, Store
+from library.models import Author, Book, City, Publisher, Store
 
 
 def start(request):
@@ -115,6 +116,21 @@ def one_store(request, pk):
             'store': store,
             'storebooks': storebooks,
             'price': price,
+        }
+    )
+
+
+def cities(request, page):
+    all_cities = City.objects.all().prefetch_related('store')
+    paginator = Paginator(all_cities, 100)
+    page_object = paginator.get_page(page)
+
+    return render(
+        request,
+        'library/cities.html',
+        {
+            'paginator': paginator,
+            'page': page_object
         }
     )
 

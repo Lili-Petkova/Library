@@ -34,3 +34,12 @@ class Store(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class City(models.Model):
+    name = models.CharField(max_length=40)
+    country = models.CharField(max_length=40)
+    store = models.ManyToManyField('Store')
+
+    def __str__(self):
+        return self.name
