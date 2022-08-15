@@ -1,10 +1,13 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import EmptyPage, Paginator
 from django.db.models import Avg, Count
+from django.http import Http404
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
+from django.views.decorators.cache import cache_page
 
-from library.models import Author, Book, Publisher, Store
+from library.models import Author, Book, City, Publisher, Store
 
 
 def start(request):
@@ -115,6 +118,26 @@ def one_store(request, pk):
             'store': store,
             'storebooks': storebooks,
             'price': price,
+        }
+    )
+
+
+@cache_page(60 * 30)
+def cities(request):
+    all_cities = City.objects.all().prefetch_related('store')
+    page = request.GET.get('page', 1)
+    paginator = Paginator(all_cities, 100)
+    try:
+        page_object = paginator.page(page)
+    except EmptyPage:
+        raise Http404
+
+    return render(
+        request,
+        'library/cities.html',
+        {
+            'paginator': paginator,
+            'page': page_object,
         }
     )
 

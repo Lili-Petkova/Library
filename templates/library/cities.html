@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cities</title>
+</head>
+<body>
+<h1>Cities</h1>
+<div>
+        {% for i in page %}
+            <p>{{ i }}, {{ i.country }} (stores:
+            {% for store in i.store.all %}
+                <a href="{% url 'library:one_store' pk=store.pk %}">{{ store }}</a>
+            {% endfor %})</p>
+        {% endfor %}
+</div>
+<p>{% if page.has_previous %}
+    <a href="?page={{page.previous_page_number}}">previous</a>
+{% endif %}
+    {% for i in paginator.page_range %}
+        <a href="?page={{ i }}">{{ i }}</a>
+    {% endfor %}
+    {% if page.has_next %}
+        <a href="?page={{page.next_page_number}}">next</a>
+    {% endif %}
+</p>
+<p><a href="{% url 'library:start' %}">back to main page</a></p>
+</body>
+</html>

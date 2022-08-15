@@ -5,12 +5,13 @@
     <title>Fiction library</title>
 </head>
 <body>
-<h1>On this site you can find lists of stores that sell your favorite books.</h1>
+<h1 >On this site you can find lists of stores that sell your favorite books.</h1>
     <h2>
         <p><a href="{% url 'library:stores' %}">List of stores</a></p>
         <p><a href="{% url 'library:publishers' %}">Publishers</a></p>
         <p><a href="{% url 'library:authors' %}">The authors</a></p>
         <p><a href="{% url 'library:books' %}">List of available books</a></p>
+        <p><a href="{% url 'library:cities' %}">Cities where we have stores</a></p>
     </h2>
 </body>
 </html>
