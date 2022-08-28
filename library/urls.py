@@ -1,7 +1,8 @@
 from django.urls import path
 
-from library.views import authors, books, cities, one_author, one_book, one_publisher, one_store, publishers, start, \
-    stores, contact
+from library.views import authors, books, cities, contact, one_author, one_book, one_publisher, one_store, publishers, \
+    start, stores
+
 
 from . import views
 

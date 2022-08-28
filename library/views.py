@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import EmptyPage, Paginator
 from django.db.models import Avg, Count
@@ -10,6 +11,7 @@ from django.views.decorators.cache import cache_page
 
 from library.forms import ContactForm
 from library.models import Author, Book, City, Publisher, Store
+
 from .tasks import send_mail
 
 
@@ -25,8 +27,10 @@ def contact(request):
             email = form.cleaned_data['email']
             text = form.cleaned_data['text']
             data['form_is_valid'] = True
-            data['answer'] = render_to_string('library/includes/success.html')
-            send_mail(text, email)
+            send_mail.delay(text, email)
+            mes = messages.add_message(request,  messages.SUCCESS, 'Message sent')
+            context = {'mes': mes}
+            data['answer'] = render_to_string('library/includes/success.html', context, request=request)
         else:
             data['form_is_valid'] = False
     else:
