@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
 <h2>{{ book }}</h2>
 <p>Author - {{ book.author }}.</p>
 <p>Publication date: {{ book.pubdate }}.</p>
@@ -13,5 +11,4 @@
 <p><a href="{% url 'library:update_book' pk=book.pk %}">update </a>or
 <a href="{% url 'library:delete_book' pk=book.pk %}">delete this book</a></p>
 <p><a href="{% url 'library:books' %}">back to all books</a></p>
-</body>
-</html>
+{% endblock %}

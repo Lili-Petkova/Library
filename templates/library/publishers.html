@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
 <h1>{{ first }}</h1>
 <h1>All publishers:</h1>
 <h3>Click on a publisher's name to see a list of their books.</h3>
@@ -15,5 +13,4 @@
         {% endfor %}
     </ul>
     <p><a href="{% url 'library:start' %}">back</a></p>
-</body>
-</html>
+{% endblock %}

@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
 <h1>{{ author }}</h1>
 <h3>Years of life {{ author.date_of_birth }} - {{ author.date_of_death }} ({{ life }} years)</h3>
 <h4>Books:</h4>
@@ -23,5 +21,4 @@
 
 </ul>
 <p><a href="{% url 'library:authors' %}">back to authors</a></p>
-</body>
-</html>
+{% endblock %}

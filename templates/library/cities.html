@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Cities</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
 <h1>Cities</h1>
 <div>
         {% for i in page %}
@@ -25,5 +23,4 @@
     {% endif %}
 </p>
 <p><a href="{% url 'library:start' %}">back to main page</a></p>
-</body>
-</html>
+{% endblock %}
