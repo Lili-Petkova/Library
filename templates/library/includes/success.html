@@ -1,10 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<p>ok</p>
-</body>
-</html>
+{% if messages %}
+     <div class="row">
+         <div class="col-sm-12">
+                {% for message in messages %}
+                     <div class="alert alert-{{ message.tags }} alert-dismissible text-center" role="alert">
+                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                             <span aria-hidden="true">&times;</span>
+                         </button>
+                         <strong>{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Error
+                         {% else %} {{ message.tags|title }}
+                         {% endif %}!
+                         </strong> {{ message }}
+                     </div>
+                {% endfor %}
+         </div>
+     </div>
+{% endif %}

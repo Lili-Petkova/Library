@@ -27,8 +27,9 @@ $(function () {
       dataType: 'json',
       success: function (data) {
         if (data.form_is_valid) {
-          $("#contactModal .modal-content").html(data.answer);
+
           $("#contactModal").modal("hide");
+          $(".container-fluid").prepend(data.answer)
         }
         else {
           $("#contactModal .modal-content").html(data.html_form);
